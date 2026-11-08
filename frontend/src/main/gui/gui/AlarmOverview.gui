@@ -1,0 +1,89 @@
+package gui;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemButton;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemCard;
+import mc.fenix.arrange.GemDialog;
+import mc.fenix.table.GemTable;
+import mc.fenix.table.GemTableHeader;
+import mc.fenix.table.GemTableRow;
+import mc.fenix.input.GemDateInput;
+
+import gui.navigation.NavContainer;
+
+import FactoryDigitalTwin.Station;
+import FactoryDigitalTwin.Alarm;
+
+page AlarmOverview(List<Station> stations, List<Alarm> alarms, ?boolean exportDialogOpen = false, ?String exportFrom, ?String exportTo, ?String selectedStationName) {
+  @NavContainer(content = [
+    @GemColumn(rowGap = "4px", components = [
+      @GemText(value = "Alarm History", size = "2rem", weight = "bold"),
+      @GemText(value = "All alarms", color = "secondary")
+    ]),
+    exportDialog@GemDialog(
+        isOpen = exportDialogOpen,
+        component = @GemCard(
+            title = "Export as CSV",
+            component = @GemColumn(rowGap = "14px", components = [
+                @GemText(value = "Select the time window:"),
+                @GemDateInput(
+                  labelText = "From:",
+                  showDateTime = true,
+                  entry = exportFrom
+                ),
+                @GemDateInput(
+                  labelText = "To:",
+                  showDateTime = true,
+                  entry = exportTo
+                ),
+                @GemRow(colGap = "10px", components = [
+                  @GemButton(label = "Export CSV",  leftClick = exportCsv()),
+                  @GemButton(label = "Cancel",      leftClick = closeExportDialog())
+                ])
+            ])
+        )
+    ),
+    filterCard@GemCard(
+        title = "Filter",
+        component = @GemRow(wrap = "wrap", colGap = "8px", components = [
+            @GemButton(label = "Select All", leftClick = selectAllAlarms()),
+            @iterate(String name : getStationNames(stations)){
+                @GemButton(label = name, leftClick = selectStationFilter(name));
+            }
+        ])
+    ),
+    alarmTableCard@GemCard(
+      title = "All Alarms",
+      component = @GemColumn(rowGap = "0px", components = [
+        @GemRow(colGap = "10px", components = [
+            exportBtn@GemButton(label = "Export CSV", leftClick = openExportDialog())
+            ]),
+        @GemTable(
+          headers = [
+            @GemTableHeader(cols = ["Station", "Type", "Message", "Timestamp", "Status"])
+          ],
+          body = [
+              @iterate(Alarm alarm : alarms) {
+                 @guard(matchesStationFilter(alarm, selectedStationName)){
+                    @GemTableRow(cols = [
+                      stationNameCell@GemText(value = alarm.station.name),
+                      alarmTypeCell@GemText(value = alarm.alarmKind),
+                      @GemText(value = alarm.alarmMessage),
+                      @GemText(value = getAlarmTimestampText(alarm)),
+                      alarmStatusCell@GemText(value = getAlarmStatusText(alarm))
+                    ]);
+                 }
+              }
+
+          ]
+        )
+
+      ])
+    )
+  ]);
+}
+
+
+

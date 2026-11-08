@@ -1,0 +1,205 @@
+import java.time.LocalDateTime;
+
+umlp FactoryDigitalTwin  {
+
+  enum StationState {
+    ACTIVE,
+    POWER_ON_IDLE,
+    READY_IDLE,
+    ERROR,
+    OVERHEATED;
+  }
+
+  enum AlarmStatus{
+    ACTIVE,
+    CLEARED;
+  }
+
+  enum SignalCategory {
+    INPUT,
+    OUTPUT,
+    INTERNAL;
+  }
+
+  enum SignalType {
+    BOOLEAN,
+    INTEGER,
+    DOUBLE,
+    STRING;
+  }
+
+
+  enum MachineCommandStatus{
+    IN_PROCESS,
+    DONE,
+    ERROR;
+  }
+
+  abstract class Station {
+    String name;
+    String machineId;
+    String opcUaBasePath;
+    StationState state;
+    boolean isExecuting;
+    int cycleCount;
+    int maintenanceIntervalCycles;
+    LocalDateTime lastMaintenanceTimestamp;
+    double activePowerInWatt;
+    double idlePowerWatt;
+    double currentPowerWatt;
+    double currentTempCelsius;
+    double totalEnergyConsumedWh;
+    String latestAlarmKind;
+    String latestAlarmMessage;
+    int alarmCount;
+    double currentWearIndex;
+    double currentHealth;
+  }
+
+
+  class Signal {
+    String tagPath;
+    String name;
+    SignalCategory category;
+    SignalType signalKind;
+    String currentValue;
+    LocalDateTime lastUpdated;
+  }
+
+
+  class Alarm {
+    LocalDateTime timeStamp;
+    String alarmKind;
+    boolean isArchived = false;
+    AlarmStatus status;
+    String alarmMessage;
+  }
+
+  class Prognosis {
+    LocalDateTime timeStamp;
+    double wearIndex;
+    double health;
+    LocalDateTime nextMaintenance;
+    String maintenanceSummary;
+  }
+
+  class VacuumGripper extends Station{
+    int verticalEncoderMin;
+    int verticalEncoderMax;
+    int rotationEncoderMax;
+    int rotationEncoderMin;
+    int armEncoderMin;
+    int armEncoderMax;
+    double movUnitPerTickVertical;
+    double movUnitPerTickRotation;
+    double movUnitPerTickArm;
+    int currentVerticalCounter;
+    int currentRotationCounter;
+    int currentArmCounter;
+    boolean verticalEnd;
+    boolean rotationEnd;
+    boolean armEnd;
+    boolean actVerticalUp;
+    boolean actVerticalDown;
+    boolean actRotationLeft;
+    boolean actRotationRight;
+    boolean actArmIn;
+    boolean actArmOut;
+    boolean actValve;
+    boolean actCompressorOn;
+  }
+
+  class HighBay extends Station {
+    int horizontalEncoderMin;
+    int horizontalEncoderMax;
+    int verticalEncoderMin;
+    int verticalEncoderMax;
+    double movUnitPerTickVertical;
+    double movUnitPerTickHorizontal;
+    int positionHorizontal;
+    int positionVertical;
+    boolean sensHorizontal;
+    boolean sensVertical;
+    boolean sensCantileverFront;
+    boolean sensCantileverBack;
+    boolean sensInside;
+    boolean sensOutside;
+    boolean actUp;
+    boolean actDown;
+    boolean actHorizontalToConveyor;
+    boolean actHorizontalToRack;
+    boolean actCantileverForward;
+    boolean actCantileverBackward;
+    boolean actConveyorForward;
+    boolean actConveyorBackward;
+  }
+
+  class MultiProcessing extends Station{
+    boolean sensOven;
+    boolean sensOvenFeederIn;
+    boolean sensOvenFeederOut;
+    boolean sensTurntablePosBelt;
+    boolean sensTurntablePosSaw;
+    boolean sensTurntablePosVacuum;
+    boolean sensVacuumGripperAtOven;
+    boolean sensVacuumGripperAtTurntable;
+    boolean sensEndConveyor;
+    boolean actSaw;
+    boolean actRotClockwise;
+    boolean actRotCounterClockwise;
+    boolean actOvenInward;
+    boolean actOvenOutward;
+    boolean actOvenLight;
+    boolean actGripperToOven;
+    boolean actGripperToTurnTable;
+    boolean actConveyorForward;
+    boolean actLowerValve;
+    boolean actCompressor;
+    boolean valveFeeder;
+    boolean valveOvenDoor;
+    boolean valveVacuum;
+  }
+
+  class SortingLine extends Station{
+    boolean sensInputLightBarrier;
+    boolean sensMiddleLightBarrier;
+    boolean sensRedLightBarrier;
+    boolean sensBlueLightBarrier;
+    boolean sensWhiteLightBarrier;
+    boolean sensImpulseCounterRaw;
+    boolean actRedEjector;
+    boolean actBlueEjector;
+    boolean actWhiteEjector;
+    boolean actMotorConveyor;
+    boolean actCompressorOn;
+  }
+
+  class ConveyorBelt extends Station{
+    boolean sensFeed;
+    boolean sensImpulse;
+    boolean sensSwap;
+    boolean actForward;
+    boolean actBackward;
+  }
+
+  class PunchingMachine extends Station {
+    boolean sensGoods;
+    boolean sensMachine;
+    boolean sensUp;
+    boolean sensDown;
+    boolean actUp;
+    boolean actDown;
+    boolean actConveyorForward;
+    boolean actConveyorBackward;
+  }
+
+  class ThermalSettings {
+      double overheatThreshold;
+      double overheatClearThreshold;
+  }
+
+  association [1] Station (station) <-> (signals) Signal [*];
+  association [1] Station (station) <-> (alarms) Alarm [*];
+  association [1] Station (station) <-> (prognosis) Prognosis [0..1];
+
+}

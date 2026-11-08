@@ -1,0 +1,128 @@
+:host ::ng-deep .gem-card-line {
+  display: none;
+}
+
+.stationsValue, .signalsValue, .healthValue, .alarmsValue {
+        font-size: 2.2rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: #111827;
+}
+
+.stationGrid {
+    background: #f0f4ff;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px dashed #c7d2fe;
+}
+
+.activeTile{
+        min-width: 180px;
+        max-width: 220px;
+        border-radius: 14px;
+        border: 2px solid #16a34a;
+        box-shadow: 0 0 12px rgba(22, 163, 74, 0.2);
+        padding: 14px;
+        cursor: pointer;
+        background: #f0fdf4;
+        transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.activeTile:hover {
+        border-color: #2563eb;
+        box-shadow: 0 0 12px rgba(22, 163, 74, 0.3);
+        transform: translateY(-2px);
+}
+
+.stationTile {
+        min-width: 180px;
+        max-width: 220px;
+        border-radius: 14px;
+        border: 2px solid #e5e7eb;
+        padding: 14px;
+        cursor: pointer;
+        transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+        background: #ffffff;
+}
+
+.stationTile:hover {
+    border-color: #2563eb;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+    transform: translateY(-2px);
+}
+
+.selectedPanel {
+        border-left: 2px solid #2563eb;
+        padding: 15px 0px 15px 25px;
+        background: #f0f7ff;
+}
+
+.selectedStateLabel {
+        display: inline-block;
+        padding: 2px 12px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        background: #dcfce7;
+        color: #15803d;
+}
+.alarmText {
+    color: #dc2626;
+}
+
+.executingLabel {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        background: #fef9c3;
+        color: #854d0e;
+}
+
+.thermalLabel{
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        background: #dbeafe;
+        color: #1e40af;
+}
+
+.latestAlarmBox {
+    border-left: 3px solid #dc2626;
+    padding-left: 12px;
+    background: #fff5f5;
+    border-radius: 0 8px 8px 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.powerCard {
+    position: sticky;
+    top: 24px;
+    :host ::ng-deep gem-card > div {
+        border-top: 3px solid #7c3aed;
+  }
+}
+
+.dotActive {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #0FFF50;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.dotInactive {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #808080;
+    margin-top: 3px;
+    flex-shrink: 0;
+}

@@ -1,0 +1,14 @@
+.gradle/
+build/
+out/
+.idea/
+*.iml
+*.iws
+*.ipr
+.venv/
+docker/mosquitto/data/
+docker/mosquitto/log/
+mqttTest.py
+backend/src/main/java/factorydigitaltwin/service/RouteDebugConfig.java
+backend/data/
+data/

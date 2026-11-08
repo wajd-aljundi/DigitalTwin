@@ -1,0 +1,26 @@
+
+
+pluginManagement {
+  repositories {
+    if(("true").equals(getProperty('useLocalRepo'))) {
+      println "Using local repo for plugins"
+      mavenLocal()
+    }
+    maven { // For UMLP Plugin
+      credentials.username mavenUser
+      credentials.password mavenPassword
+      url = "https://nexus.se.rwth-aachen.de/content/groups/umlp"
+    }
+
+
+    gradlePluginPortal()
+    mavenCentral()
+  }
+}
+
+
+rootProject.name = 'factory-digital-twin'
+
+include 'backend'
+include 'frontend'
+include 'mqttGateway'

@@ -1,0 +1,381 @@
+
+  
+  
+    
+<nav-bar class='navBar0'
+      [content] = '[gemColumn1Tpl, exportDialogTpl, signalTableCardTpl, ]'
+>
+</nav-bar>
+
+
+
+  <ng-template #gemText2Tpl>
+    
+    
+<gem-text class='gemText2'
+      [value] = 'getGemText2Value__synchronized(
+        )'
+      [size] = 'getGemText2Size__synchronized(
+        )'
+      [weight] = 'getGemText2Weight__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText3Tpl>
+    
+    
+<gem-text class='gemText3'
+      [value] = 'getGemText3Value__synchronized(
+        )'
+      [color] = 'getGemText3Color__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemColumn1Tpl>
+    
+    
+<gem-column class='gemColumn1'
+      [rowGap] = 'getGemColumn1RowGap__synchronized(
+        )'
+      [components] = '[gemText2Tpl, gemText3Tpl, ]'
+>
+</gem-column>
+
+
+
+  </ng-template>
+  <ng-template #gemText6Tpl>
+    
+    
+<gem-text class='gemText6'
+      [value] = 'getGemText6Value__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemDateInput7Tpl>
+    
+    
+<gem-date-input class='gemDateInput7'
+      [labelText] = 'getGemDateInput7LabelText__synchronized(
+        )'
+      [showDateTime] = 'getGemDateInput7ShowDateTime__synchronized(
+        )'
+      [entry] = 'getGemDateInput7Entry__synchronized(
+        )'
+        (entryChange) = 'setGemDateInput7Entry(
+          $event)'
+>
+</gem-date-input>
+
+
+
+  </ng-template>
+  <ng-template #gemDateInput8Tpl>
+    
+    
+<gem-date-input class='gemDateInput8'
+      [labelText] = 'getGemDateInput8LabelText__synchronized(
+        )'
+      [showDateTime] = 'getGemDateInput8ShowDateTime__synchronized(
+        )'
+      [entry] = 'getGemDateInput8Entry__synchronized(
+        )'
+        (entryChange) = 'setGemDateInput8Entry(
+          $event)'
+>
+</gem-date-input>
+
+
+
+  </ng-template>
+  <ng-template #gemButton10Tpl>
+    
+    
+<gem-button class='gemButton10'
+      [label] = 'getGemButton10Label__synchronized(
+        )'
+      (leftClick) = 'gemButton10LeftClick.bind(this)($event)'
+>
+</gem-button>
+
+
+
+  </ng-template>
+  <ng-template #gemButton11Tpl>
+    
+    
+<gem-button class='gemButton11'
+      [label] = 'getGemButton11Label__synchronized(
+        )'
+      (leftClick) = 'gemButton11LeftClick.bind(this)($event)'
+>
+</gem-button>
+
+
+
+  </ng-template>
+  <ng-template #gemRow9Tpl>
+    
+    
+<gem-row class='gemRow9'
+      [colGap] = 'getGemRow9ColGap__synchronized(
+        )'
+      [components] = '[gemButton10Tpl, gemButton11Tpl, ]'
+>
+</gem-row>
+
+
+
+  </ng-template>
+  <ng-template #gemColumn5Tpl>
+    
+    
+<gem-column class='gemColumn5'
+      [rowGap] = 'getGemColumn5RowGap__synchronized(
+        )'
+      [components] = '[gemText6Tpl, gemDateInput7Tpl, gemDateInput8Tpl, gemRow9Tpl, ]'
+>
+</gem-column>
+
+
+
+  </ng-template>
+  <ng-template #gemCard4Tpl>
+    
+    
+<gem-card class='gemCard4'
+      [title] = 'getGemCard4Title__synchronized(
+        )'
+      [component] = 'gemColumn5Tpl'
+>
+</gem-card>
+
+
+
+  </ng-template>
+  <ng-template #exportDialogTpl>
+    
+    
+<gem-dialog class='exportDialog'
+      [isOpen] = 'getExportDialogIsOpen__synchronized(
+        )'
+        (isOpenChange) = 'setExportDialogIsOpen(
+          $event)'
+      [component] = 'gemCard4Tpl'
+>
+</gem-dialog>
+
+
+
+  </ng-template>
+  <ng-template #exportBtnTpl>
+    
+    
+<gem-button class='exportBtn'
+      [label] = 'getExportBtnLabel__synchronized(
+        )'
+      (leftClick) = 'exportBtnLeftClick.bind(this)($event)'
+>
+</gem-button>
+
+
+
+  </ng-template>
+  <ng-template #gemRow13Tpl>
+    
+    
+<gem-row class='gemRow13'
+      [colGap] = 'getGemRow13ColGap__synchronized(
+        )'
+      [components] = '[exportBtnTpl, ]'
+>
+</gem-row>
+
+
+
+  </ng-template>
+  <ng-template #gemTableHeader15Tpl>
+    
+    
+<gem-table-header class='gemTableHeader15'
+      [cols] = 'getGemTableHeader15Cols__synchronized(
+        )'
+>
+</gem-table-header>
+
+
+
+  </ng-template>
+  <ng-template #it16Tpl>
+    
+  
+  <ng-container *ngFor='let station of toArray(getIt16Iterable__synchronized()); index as cIt16'>
+  
+  
+  
+  <ng-container *ngFor='let signal of toArray(getIt17Iterable__synchronized(station)); index as cIt17'>
+  
+  
+  
+  <ng-container *ngFor='let m of toArray(getIt18Iterable__synchronized(signal, station)); index as cIt18'>
+  
+  
+    
+<gem-table-row class='gemTableRow19'
+      [cols] = '[gemText20Tpl, gemText21Tpl, categoryCellTpl, gemText22Tpl, gemText23Tpl, gemText24Tpl, gemText25Tpl, ]'
+>
+</gem-table-row>
+
+
+
+  <ng-template #gemText20Tpl>
+    
+    
+<gem-text class='gemText20'
+      [value] = 'getGemText20Value__synchronized(
+        m,signal,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText21Tpl>
+    
+    
+<gem-text class='gemText21'
+      [value] = 'getGemText21Value__synchronized(
+        m,signal,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #categoryCellTpl>
+    
+    
+<gem-text class='categoryCell'
+      [value] = 'getCategoryCellValue__synchronized(
+        m,signal,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText22Tpl>
+    
+    
+<gem-text class='gemText22'
+      [value] = 'getGemText22Value__synchronized(
+        m,signal,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText23Tpl>
+    
+    
+<gem-text class='gemText23'
+      [value] = 'getGemText23Value__synchronized(
+        m,signal,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText24Tpl>
+    
+    
+<gem-text class='gemText24'
+      [value] = 'getGemText24Value__synchronized(
+        m,signal,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText25Tpl>
+    
+    
+<gem-text class='gemText25'
+      [value] = 'getGemText25Value__synchronized(
+        m,signal,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+
+</ng-container>
+
+
+
+
+</ng-container>
+
+
+
+
+</ng-container>
+
+
+
+  </ng-template>
+  <ng-template #gemTable14Tpl>
+    
+    
+<gem-table class='gemTable14'
+      [headers] = '[gemTableHeader15Tpl, ]'
+      [body] = '[it16Tpl, ]'
+>
+</gem-table>
+
+
+
+  </ng-template>
+  <ng-template #gemColumn12Tpl>
+    
+    
+<gem-column class='gemColumn12'
+      [rowGap] = 'getGemColumn12RowGap__synchronized(
+        )'
+      [components] = '[gemRow13Tpl, gemTable14Tpl, ]'
+>
+</gem-column>
+
+
+
+  </ng-template>
+  <ng-template #signalTableCardTpl>
+    
+    
+<gem-card class='signalTableCard'
+      [title] = 'getSignalTableCardTitle__synchronized(
+        )'
+      [component] = 'gemColumn12Tpl'
+>
+</gem-card>
+
+
+
+  </ng-template>
+

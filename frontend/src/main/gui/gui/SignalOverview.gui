@@ -1,0 +1,90 @@
+package gui;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemButton;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemCard;
+import mc.fenix.arrange.GemDialog;
+import mc.fenix.table.GemTable;
+import mc.fenix.table.GemTableHeader;
+import mc.fenix.table.GemTableRow;
+import mc.fenix.input.GemDateInput;
+
+import gui.navigation.NavContainer;
+
+import FactoryDigitalTwin.Station;
+import FactoryDigitalTwin.Signal;
+import FactoryDigitalTwin.Measurement;
+
+page SignalOverview(List<Station> stations, List<Signal> signals, ?boolean exportDialogOpen = false, ?String exportFrom, ?String exportTo, ?String selectedStationName) {
+  @NavContainer(content = [
+    @GemColumn(rowGap = "4px", components = [
+      @GemText(value = "Signal Monitor", size = "2rem", weight = "bold"),
+      @GemText(value = "All signals", color = "secondary")
+    ]),
+    exportDialog@GemDialog(
+      isOpen = exportDialogOpen,
+      component = inputColumn@GemCard(
+        title = "Export as CSV",
+        component = @GemColumn(rowGap = "14px", components = [
+          @GemText(value = "Select the time window:"),
+          @GemDateInput(
+            labelText = "From:",
+            showDateTime = true,
+            entry = exportFrom
+          ),
+          @GemDateInput(
+            labelText = "To:",
+            showDateTime = true,
+            entry = exportTo
+          ),
+          @GemRow(colGap = "10px", components = [
+            @GemButton(label = "Export CSV",  leftClick = exportCsv()),
+            @GemButton(label = "Cancel",      leftClick = closeExportDialog())
+          ])
+        ])
+      )
+    ),
+    filterCard@GemCard(
+        title = "Filter",
+        component = @GemRow(wrap = "wrap", colGap = "8px", components = [
+            @GemButton(label = "Select All", leftClick = selectAllSignals()),
+            @iterate(String name : getStationNames(stations)){
+                @GemButton(label = name, leftClick = selectStationFilter(name));
+            }
+        ])
+    ),
+    signalTableCard@GemCard(
+      title = "Signal Table",
+      component = @GemColumn(rowGap = "12px", components = [
+        @GemRow(colGap = "10px", components = [
+          exportBtn@GemButton(label = "Export CSV", leftClick = openExportDialog())
+        ]),
+        @GemTable(
+          headers = [
+            @GemTableHeader(cols = ["Station", "Signal", "Kind", "Category",
+                                    "Topic", "Value", "Timestamp"])
+          ],
+          body = [
+              @iterate(Signal signal : signals) {
+                    @guard(matchesStationFilter(signal, selectedStationName)){
+                        @GemTableRow(cols = [
+                          @GemText(value = signal.station.name),
+                          @GemText(value = signal.name),
+                          @GemText(value = getSignalKindText(signal)),
+                          categoryCell@GemText(value = getSignalCategoryText(signal)),
+                          @GemText(value = signal.tagPath),
+                          @GemText(value = signal.currentValue),
+                          @GemText(value = getSignalTimestampText(signal))
+                        ]);
+                    }
+              }
+          ]
+        )
+
+      ])
+    )
+  ]);
+}
+

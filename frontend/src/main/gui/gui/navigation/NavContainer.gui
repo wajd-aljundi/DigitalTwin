@@ -1,0 +1,19 @@
+package gui.navigation;
+
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.navigation.GemNavItem;
+import mc.fenix.navigation.GemNavList;
+
+component NavContainer(List<GUIViewElement> content) {
+  @GemRow(colGap = "0px", components = [
+    @GemNavList(width = "34ch", height = "100vh", components = [
+      @GemNavItem(title = "Dashboard",   target = "/gui/Start"),
+      @GemNavItem(title = "Alarms",      target = "/gui/AlarmOverview"),
+      @GemNavItem(title = "Signals",     target = "/gui/SignalOverview"),
+      @GemNavItem(title = "Prognosis",   target = "/gui/PrognosisOverview"),
+      @GemNavItem(title = "SettingsOverview",   target = "/gui/SettingsOverview")
+    ]),
+    @GemColumn(hAlign = "stretch", width = "100%", rowGap = "0px", components = content)
+  ]);
+}

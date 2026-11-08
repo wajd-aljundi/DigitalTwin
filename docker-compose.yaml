@@ -1,0 +1,70 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: factory_mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./docker/mosquitto/config:/mosquitto/config
+      - ./docker/mosquitto/data:/mosquitto/data
+    networks:
+      - twin_net
+
+  mqtt-recorder:
+    build: ./mqtt-recorder
+    container_name: factory_mqtt_recorder
+    depends_on:
+      - mosquitto
+    volumes:
+      - ./backend/src/main/resources/simple_process.csv:/data/simple_process.csv:ro
+    command: >
+      --host mosquitto
+      --port 1883
+      --mode replay
+      --file /data/simple_process.csv
+      --loop True
+    networks:
+      - twin_net
+
+  backend:
+    image: factorydigitaltwin-backend:latest
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    volumes:
+      - ./data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    container_name: factory_backend
+    depends_on:
+      - mosquitto
+    ports:
+      - "8081:8081"
+    networks:
+      - twin_net
+
+  gateway:
+    image: factorydigitaltwin-gateway:latest
+    container_name: factory_gateway
+    depends_on:
+      - mosquitto
+    environment:
+      MQTT_BROKER_URL: tcp://mosquitto:1883
+      GATEWAY_HTTP_PORT: 8082
+      ALLOWED_ORIGIN: http://localhost
+    ports:
+      - "8082:8082"
+    networks:
+      - twin_net
+
+  frontend:
+    image: factorydigitaltwin-frontend:latest
+    container_name: factory_frontend
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - twin_net
+
+networks:
+  twin_net:

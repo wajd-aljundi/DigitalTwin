@@ -1,0 +1,5 @@
+build/app/node_modules
+build/hwc
+build/gui2java2ts
+build/umlpJava2ts
+src

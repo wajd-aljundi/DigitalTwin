@@ -1,0 +1,112 @@
+:root {
+  --bg:     #f3f4f6;
+  --panel:  #ffffff;
+  --text:   #111827;
+  --muted:  #6b7280;
+  --border: #e5e7eb;
+  --radius: 14px;
+  --shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--text);
+}
+
+gem-nav-list {
+  background: #111827 !important;
+  border-right: none !important;
+  min-height: 100vh;
+}
+
+gem-nav-item a,
+gem-nav-item button {
+  color: #9ca3af !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  font-size: 13.5px !important;
+  background: transparent !important;
+  display: block;
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  margin: 2px 8px;
+}
+
+gem-nav-item a:hover,
+gem-nav-item button:hover {
+  background: rgba(255,255,255,0.08) !important;
+  color: #fff !important;
+}
+gem-nav-list + gem-column,
+gem-row > gem-column:last-child {
+  padding: 28px 32px;
+}
+
+gem-card > div {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+.gem-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+gem-button button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+gem-button button:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+gem-table { display: block; overflow: auto; max-height: 520px; }
+gem-table table { width: 100%; border-collapse: collapse; font-size: 13px; }
+gem-table thead { position: sticky; top: 0; z-index: 2; }
+gem-table th {
+  background: #f9fafb;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+}
+gem-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+gem-table tr:hover td { background: #f8fafc; }
+
+gem-grid td { padding: 5px 14px 5px 0; font-size: 13px; }
+gem-grid td:first-child { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }

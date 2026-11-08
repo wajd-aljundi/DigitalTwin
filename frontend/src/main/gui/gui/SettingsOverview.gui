@@ -1,0 +1,113 @@
+package gui;
+
+
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemButton;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemCard;
+import mc.fenix.table.GemTable;
+import mc.fenix.table.GemTableHeader;
+import mc.fenix.table.GemTableRow;
+import mc.fenix.input.GemTextInput;
+import gui.navigation.NavContainer;
+
+page SettingsOverview(
+    ?String minTempInput = "20.0", ?String maxTempInput = "95.0",
+    ?String heatingRateInput = "5.0", ?String coolingRateInput = "1.0",
+    ?String vg01ActivePowerInput = "2000.0", ?String vg01IdlePowerInput = "500.0",
+    ?String vg02ActivePowerInput = "2000.0", ?String vg02IdlePowerInput = "500.0",
+    ?String sl01ActivePowerInput = "2000.0", ?String sl01IdlePowerInput = "500.0",
+    ?String hb01ActivePowerInput = "2000.0", ?String hb01IdlePowerInput = "500.0",
+    ?String cb01ActivePowerInput = "2000.0", ?String cb01IdlePowerInput = "500.0",
+    ?String mp01ActivePowerInput = "2000.0", ?String mp01IdlePowerInput = "500.0",
+    ?String pm01ActivePowerInput = "2000.0", ?String pm01IdlePowerInput = "500.0",
+    ?String overheatThresholdInput = "90.0", ?String overheatClearThresholdInput = "75.0",
+    ?String maintenanceIntervalCycles = "1000.0", ?String thermalPenalty = "0.2"){
+
+    @NavContainer(content = [
+        @GemColumn(rowGap = "4px", components = [
+            @GemText(value="Settings", size = "2rem", weight = "bold"),
+            @GemText(value="Parameters", color = "secondary")
+        ]),
+
+        gatewayThermalCard@GemCard(
+            title = "Gateway Thermal Parameters",
+            component = @GemColumn(rowGap = "12px", components = [
+                @GemRow(colGap = "12px", components = [
+                    @GemTextInput(labelText = "Min Temp (°C)", entry = minTempInput),
+                    @GemTextInput(labelText = "Max Temp (°C)", entry = maxTempInput)
+                ]),
+                @GemRow(colGap = "12px", components = [
+                    @GemTextInput(labelText = "Heating Rate (°C/tick)", entry = heatingRateInput),
+                    @GemTextInput(labelText = "Cooling Rate (°C/tick)", entry = coolingRateInput)
+                ]),
+                @GemRow(colGap = "12px", components = [
+                    @GemTextInput(labelText = "Number of cycles until next maintenance", entry = maintenanceIntervalCycles)
+                ])
+            ])
+        ),
+
+        gatewayPowerCard@GemCard(
+            title = "Gateway Power Parameters",
+            component = @GemColumn(rowGap = "12px", components = [
+                @GemTable(
+                    headers = [
+                        @GemTableHeader(cols = ["Station", "Active Power (W)", "Idle Power (W)"])
+                    ],
+                    body = [
+                        @GemTableRow(cols=[
+                            @GemText(value = "VacuumGripper01"),
+                            @GemTextInput(labelText = "", entry = vg01ActivePowerInput),
+                            @GemTextInput(labelText = "", entry = vg01IdlePowerInput)
+                        ]),
+                        @GemTableRow(cols=[
+                            @GemText(value = "VacuumGripper02"),
+                            @GemTextInput(labelText = "", entry = vg02ActivePowerInput),
+                            @GemTextInput(labelText = "", entry = vg02IdlePowerInput)
+                        ]),
+                        @GemTableRow(cols=[
+                            @GemText(value = "SortingLine01"),
+                            @GemTextInput(labelText = "", entry = sl01ActivePowerInput),
+                            @GemTextInput(labelText = "", entry = sl01IdlePowerInput)
+                        ]),
+                         @GemTableRow(cols=[
+                            @GemText(value = "HighBay01"),
+                            @GemTextInput(labelText = "", entry = hb01ActivePowerInput),
+                            @GemTextInput(labelText = "", entry = hb01IdlePowerInput)
+                        ]),
+                        @GemTableRow(cols=[
+                            @GemText(value = "ConveyorBelt01"),
+                            @GemTextInput(labelText = "", entry = cb01ActivePowerInput),
+                            @GemTextInput(labelText = "", entry = cb01IdlePowerInput)
+                        ]),
+                         @GemTableRow(cols=[
+                            @GemText(value = "MultiProcessing01"),
+                            @GemTextInput(labelText = "", entry = mp01ActivePowerInput),
+                            @GemTextInput(labelText = "", entry = mp01IdlePowerInput)
+                        ]),
+                         @GemTableRow(cols=[
+                            @GemText(value = "PunchingMachine01"),
+                            @GemTextInput(labelText = "", entry = pm01ActivePowerInput),
+                            @GemTextInput(labelText = "", entry = pm01IdlePowerInput)
+                        ])
+                    ]
+                )
+            ])
+        ),
+
+        dtThresholdCard@GemCard(
+            title = "Digital Twin Alarm Thresholds",
+            component = @GemColumn(rowGap = "12px", components = [
+                @GemRow(colGap="12px", components = [
+                    @GemTextInput(labelText = "Overheat Threshold(°C)", entry = overheatThresholdInput),
+                    @GemTextInput(labelText = "Overheat Clear Threshold (°C)", entry = overheatClearThresholdInput)
+                ])
+            ])
+        ),
+
+        @GemRow(colGap = "10px", components = [
+            saveBtn@GemButton(label = "Save & Restart", leftClick = saveAllAndRestart())
+        ])
+    ]);
+}

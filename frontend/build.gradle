@@ -1,0 +1,34 @@
+/* (c) https://github.com/MontiCore/monticore */
+import de.montigem.gradle.specific.GUI2Java2TSTask
+
+plugins {
+  id 'de.rwth.se.montigem-frontend'
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+
+tasks.named("gui2java2ts", GUI2Java2TSTask) {
+  guiCreateModels = []
+  dependsOn(":backend:build")
+}
+
+dependencies {
+  implementation project(':backend')
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+compileJava.dependsOn(':backend:jar')
+
+tasks.named("umlpJava2ts"){
+  excludeSource.add("glob:**/factorydigitaltwin/service/**")
+}
+tasks.named("buildApp") {
+  args = ['build', '--configuration', 'development']
+}
+test {
+  useJUnitPlatform()
+}

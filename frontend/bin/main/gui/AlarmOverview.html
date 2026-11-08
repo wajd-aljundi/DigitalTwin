@@ -1,0 +1,194 @@
+
+  
+  
+    
+<nav-bar class='navBar0'
+      [content] = '[gemColumn1Tpl, alarmTableCardTpl, ]'
+>
+</nav-bar>
+
+
+
+  <ng-template #gemText2Tpl>
+    
+    
+<gem-text class='gemText2'
+      [value] = 'getGemText2Value__synchronized(
+        )'
+      [size] = 'getGemText2Size__synchronized(
+        )'
+      [weight] = 'getGemText2Weight__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText3Tpl>
+    
+    
+<gem-text class='gemText3'
+      [value] = 'getGemText3Value__synchronized(
+        )'
+      [color] = 'getGemText3Color__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemColumn1Tpl>
+    
+    
+<gem-column class='gemColumn1'
+      [rowGap] = 'getGemColumn1RowGap__synchronized(
+        )'
+      [components] = '[gemText2Tpl, gemText3Tpl, ]'
+>
+</gem-column>
+
+
+
+  </ng-template>
+  <ng-template #gemTableHeader6Tpl>
+    
+    
+<gem-table-header class='gemTableHeader6'
+      [cols] = 'getGemTableHeader6Cols__synchronized(
+        )'
+>
+</gem-table-header>
+
+
+
+  </ng-template>
+  <ng-template #it7Tpl>
+    
+  
+  <ng-container *ngFor='let station of toArray(getIt7Iterable__synchronized()); index as cIt7'>
+  
+  
+  
+  <ng-container *ngFor='let alarm of toArray(getIt8Iterable__synchronized(station)); index as cIt8'>
+  
+  
+    
+<gem-table-row class='gemTableRow9'
+      [cols] = '[stationNameCellTpl, alarmTypeCellTpl, gemText10Tpl, gemText11Tpl, alarmStatusCellTpl, ]'
+>
+</gem-table-row>
+
+
+
+  <ng-template #stationNameCellTpl>
+    
+    
+<gem-text class='stationNameCell'
+      [value] = 'getStationNameCellValue__synchronized(
+        alarm,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #alarmTypeCellTpl>
+    
+    
+<gem-text class='alarmTypeCell'
+      [value] = 'getAlarmTypeCellValue__synchronized(
+        alarm,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText10Tpl>
+    
+    
+<gem-text class='gemText10'
+      [value] = 'getGemText10Value__synchronized(
+        alarm,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText11Tpl>
+    
+    
+<gem-text class='gemText11'
+      [value] = 'getGemText11Value__synchronized(
+        alarm,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #alarmStatusCellTpl>
+    
+    
+<gem-text class='alarmStatusCell'
+      [value] = 'getAlarmStatusCellValue__synchronized(
+        alarm,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+
+</ng-container>
+
+
+
+
+</ng-container>
+
+
+
+  </ng-template>
+  <ng-template #gemTable5Tpl>
+    
+    
+<gem-table class='gemTable5'
+      [headers] = '[gemTableHeader6Tpl, ]'
+      [body] = '[it7Tpl, ]'
+>
+</gem-table>
+
+
+
+  </ng-template>
+  <ng-template #gemColumn4Tpl>
+    
+    
+<gem-column class='gemColumn4'
+      [rowGap] = 'getGemColumn4RowGap__synchronized(
+        )'
+      [components] = '[gemTable5Tpl, ]'
+>
+</gem-column>
+
+
+
+  </ng-template>
+  <ng-template #alarmTableCardTpl>
+    
+    
+<gem-card class='alarmTableCard'
+      [title] = 'getAlarmTableCardTitle__synchronized(
+        )'
+      [component] = 'gemColumn4Tpl'
+>
+</gem-card>
+
+
+
+  </ng-template>
+

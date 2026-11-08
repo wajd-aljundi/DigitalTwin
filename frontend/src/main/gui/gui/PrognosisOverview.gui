@@ -1,0 +1,47 @@
+package gui;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemCard;
+import mc.fenix.arrange.GemGrid;
+import mc.fenix.table.GemTable;
+import mc.fenix.table.GemTableHeader;
+import mc.fenix.table.GemTableRow;
+
+import gui.navigation.NavContainer;
+
+import FactoryDigitalTwin.Station;
+import FactoryDigitalTwin.Prognosis;
+
+page PrognosisOverview(List<Station> stations) {
+  @NavContainer(content = [
+    systemHealthCard@GemCard(
+      title = "Overall System Health",
+      component = @GemGrid(rows = [
+        [@GemText(value = "Average health:"),      @GemText(value = getSystemHealthAvg())],
+        [@GemText(value = "Stations monitored:"),  @GemText(value = getStationCount())],
+        [@GemText(value = "Next maintenance:"),    @GemText(value = getNextMaintenanceDate())]
+      ])
+    ),
+    prognosisTableCard@GemCard(
+      title = "Station Prognosis",
+      component = @GemTable(
+        headers = [
+          @GemTableHeader(cols = [
+            "Station", "Health", "Wear Index", "Next Maintenance"
+          ])
+        ],
+        body = [
+          @iterate(Station station : stations) {
+              @GemTableRow(cols = [
+                  stationNameCell@GemText(value = station.name),
+                  healthCell@GemText(value = station.prognosis.health),
+                  @GemText(value = station.prognosis.wearIndex),
+                  maintCell@GemText(value = getNextMaintenanceDateForPrognosis(station))
+              ]);
+          }
+        ]
+      )
+    )
+  ]);
+}

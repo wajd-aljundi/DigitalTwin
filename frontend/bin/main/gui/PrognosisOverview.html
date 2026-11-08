@@ -1,0 +1,289 @@
+
+  
+  
+    
+<nav-bar class='navBar0'
+      [content] = '[gemColumn1Tpl, systemHealthCardTpl, prognosisTableCardTpl, ]'
+>
+</nav-bar>
+
+
+
+  <ng-template #gemText2Tpl>
+    
+    
+<gem-text class='gemText2'
+      [value] = 'getGemText2Value__synchronized(
+        )'
+      [size] = 'getGemText2Size__synchronized(
+        )'
+      [weight] = 'getGemText2Weight__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText3Tpl>
+    
+    
+<gem-text class='gemText3'
+      [value] = 'getGemText3Value__synchronized(
+        )'
+      [color] = 'getGemText3Color__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemColumn1Tpl>
+    
+    
+<gem-column class='gemColumn1'
+      [rowGap] = 'getGemColumn1RowGap__synchronized(
+        )'
+      [components] = '[gemText2Tpl, gemText3Tpl, ]'
+>
+</gem-column>
+
+
+
+  </ng-template>
+  <ng-template #gemText5Tpl>
+    
+    
+<gem-text class='gemText5'
+      [value] = 'getGemText5Value__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText6Tpl>
+    
+    
+<gem-text class='gemText6'
+      [value] = 'getGemText6Value__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText7Tpl>
+    
+    
+<gem-text class='gemText7'
+      [value] = 'getGemText7Value__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText8Tpl>
+    
+    
+<gem-text class='gemText8'
+      [value] = 'getGemText8Value__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText9Tpl>
+    
+    
+<gem-text class='gemText9'
+      [value] = 'getGemText9Value__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText10Tpl>
+    
+    
+<gem-text class='gemText10'
+      [value] = 'getGemText10Value__synchronized(
+        )'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemGrid4Tpl>
+    
+    
+<gem-grid class='gemGrid4'
+      [rows] = '[[gemText5Tpl, gemText6Tpl, ], [gemText7Tpl, gemText8Tpl, ], [gemText9Tpl, gemText10Tpl, ], ]'
+>
+</gem-grid>
+
+
+
+  </ng-template>
+  <ng-template #systemHealthCardTpl>
+    
+    
+<gem-card class='systemHealthCard'
+      [title] = 'getSystemHealthCardTitle__synchronized(
+        )'
+      [component] = 'gemGrid4Tpl'
+>
+</gem-card>
+
+
+
+  </ng-template>
+  <ng-template #gemTableHeader12Tpl>
+    
+    
+<gem-table-header class='gemTableHeader12'
+      [cols] = 'getGemTableHeader12Cols__synchronized(
+        )'
+>
+</gem-table-header>
+
+
+
+  </ng-template>
+  <ng-template #it13Tpl>
+    
+  
+  <ng-container *ngFor='let station of toArray(getIt13Iterable__synchronized()); index as cIt13'>
+  
+  
+  
+  <ng-container *ngFor='let prognosis of toArray(getIt14Iterable__synchronized(station)); index as cIt14'>
+  
+  
+    
+<gem-table-row class='gemTableRow15'
+      [cols] = '[stationNameCellTpl, gemText16Tpl, healthCellTpl, gemText17Tpl, wearCellTpl, maintCellTpl, ]'
+>
+</gem-table-row>
+
+
+
+  <ng-template #stationNameCellTpl>
+    
+    
+<gem-text class='stationNameCell'
+      [value] = 'getStationNameCellValue__synchronized(
+        prognosis,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText16Tpl>
+    
+    
+<gem-text class='gemText16'
+      [value] = 'getGemText16Value__synchronized(
+        prognosis,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #healthCellTpl>
+    
+    
+<gem-text class='healthCell'
+      [value] = 'getHealthCellValue__synchronized(
+        prognosis,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #gemText17Tpl>
+    
+    
+<gem-text class='gemText17'
+      [value] = 'getGemText17Value__synchronized(
+        prognosis,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #wearCellTpl>
+    
+    
+<gem-text class='wearCell'
+      [value] = 'getWearCellValue__synchronized(
+        prognosis,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+  <ng-template #maintCellTpl>
+    
+    
+<gem-text class='maintCell'
+      [value] = 'getMaintCellValue__synchronized(
+        prognosis,station)'
+>
+</gem-text>
+
+
+
+  </ng-template>
+
+</ng-container>
+
+
+
+
+</ng-container>
+
+
+
+  </ng-template>
+  <ng-template #gemTable11Tpl>
+    
+    
+<gem-table class='gemTable11'
+      [headers] = '[gemTableHeader12Tpl, ]'
+      [body] = '[it13Tpl, ]'
+>
+</gem-table>
+
+
+
+  </ng-template>
+  <ng-template #prognosisTableCardTpl>
+    
+    
+<gem-card class='prognosisTableCard'
+      [title] = 'getPrognosisTableCardTitle__synchronized(
+        )'
+      [component] = 'gemTable11Tpl'
+>
+</gem-card>
+
+
+
+  </ng-template>
+
